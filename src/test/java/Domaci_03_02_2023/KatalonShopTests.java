@@ -48,7 +48,6 @@ public class KatalonShopTests {
 
     @Test(priority = 10)
     public void addingProductsWithQuantityToTheCart(){
-
         driver.findElement(By.xpath("//*[@class='quantity']/input")).clear();
         driver.findElement(By.xpath("//*[@class='quantity']/input")).sendKeys("3");
         driver.findElement(By.name("add-to-cart")).click();
@@ -60,7 +59,6 @@ public class KatalonShopTests {
         Assert.assertEquals(driver.getCurrentUrl(),baseUrl+ "/cart/", "Url is not right");
         int cartElements = driver.findElements(By.xpath("//*[@class='entry-content']/div/form")).size();
         Assert.assertEquals(cartElements,1,"There are no products in the cart");
-
     }
 
 //    Test #2:  Removing product from cart
@@ -98,7 +96,6 @@ public class KatalonShopTests {
                         .xpath("//*[@class='woocommerce-error']/li")).getText();
         Assert.assertEquals(errorMessage, "Error: Username is required.",
                 "Error message is wrong" );
-
     }
 //    Test #4:  Verify error is displayed when password is missing
 //    Prioritet = 40
@@ -108,7 +105,6 @@ public class KatalonShopTests {
 //    Klik na login dugme
 //    Verifikovati da je prikazana poruka ERROR: The password field is empty.
     @Test(priority = 40)
-    @Description("Verify error is displayed when password is missing")
     public void verifyErrorIsDisplayedWhenPasswordIsMissing(){
         driver.findElement
                 (By.xpath("//a[@href = 'https://cms.demo.katalon.com/my-account/']")).click();
@@ -133,7 +129,6 @@ public class KatalonShopTests {
 //    The password you entered for the username customer is incorrect. Lost your password?
     @Test(priority = 50)
     public void verifyErrorIsDisplayedWhenPasswordIsWrong(){
-
         driver.findElement
                 (By.xpath("//a[@href = 'https://cms.demo.katalon.com/my-account/']")).click();
         driver.findElement(By.name("username")).
@@ -191,8 +186,7 @@ public class KatalonShopTests {
         driver.findElement(By.name("password")).
                 sendKeys("crz7mrb.KNG3yxv1fbn");
         driver.findElement(By.name("login")).click();
-        Assert.assertTrue(driver.findElement(
-                                By.xpath("//*[@id='post-10']"))
+        Assert.assertTrue(driver.findElement(By.xpath("//*[@id='post-10']"))
                         .getText().contains("Hello Katalon Parlitul_Changed"),
                 "Wrong message");
     }
