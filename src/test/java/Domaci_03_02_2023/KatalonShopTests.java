@@ -15,8 +15,6 @@ import java.time.Duration;
 
 public class KatalonShopTests {
 
-
-
     private String baseUrl = "https://cms.demo.katalon.com";
     private WebDriver driver;
     private WebDriverWait wait;
@@ -97,9 +95,7 @@ public class KatalonShopTests {
         driver.findElement(By.xpath("//*[@id='primary-menu']//li[3]/a")).click();
         driver.findElement(By.name("login")).click();
         String errorMessage = driver.findElement(By
-                        .xpath("//*[@class='woocommerce-error']/li"))
-                .getText();
-
+                        .xpath("//*[@class='woocommerce-error']/li")).getText();
         Assert.assertEquals(errorMessage, "Error: Username is required.",
                 "Error message is wrong" );
 
@@ -168,7 +164,7 @@ public class KatalonShopTests {
         driver.findElement(By.name("username")).
                 sendKeys("invaliduser");
         driver.findElement(By.name("password")).
-                sendKeys("mjaumjau");
+                sendKeys("1234567");
         driver.findElement(By.name("login")).click();
         String errorMessage = driver.findElement
                 (By.xpath("//*[@class = 'woocommerce-error']")).getText();
@@ -195,7 +191,6 @@ public class KatalonShopTests {
         driver.findElement(By.name("password")).
                 sendKeys("crz7mrb.KNG3yxv1fbn");
         driver.findElement(By.name("login")).click();
-
         Assert.assertTrue(driver.findElement(
                                 By.xpath("//*[@id='post-10']"))
                         .getText().contains("Hello Katalon Parlitul_Changed"),
