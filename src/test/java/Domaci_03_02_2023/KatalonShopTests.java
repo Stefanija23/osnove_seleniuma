@@ -24,12 +24,10 @@ public class KatalonShopTests {
     @BeforeClass
     public void beforeClass(){
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-
         driver.manage().window().maximize();
     }
     @BeforeMethod
@@ -56,17 +54,12 @@ public class KatalonShopTests {
         driver.findElement(By.xpath("//*[@class='quantity']/input")).clear();
         driver.findElement(By.xpath("//*[@class='quantity']/input")).sendKeys("3");
         driver.findElement(By.name("add-to-cart")).click();
-
         WebElement message = driver.findElement(By.className("woocommerce-message"));
-
         Assert.assertTrue(message.getText().contains("Flying Ninja"),
                 "Message doesn't contain right message");
-
         driver.findElement(By.className("woocommerce-message"))
                 .findElement(By.tagName("a")).click();
-
         Assert.assertEquals(driver.getCurrentUrl(),baseUrl+ "/cart/", "Url is not right");
-
         int cartElements = driver.findElements(By.xpath("//*[@class='entry-content']/div/form")).size();
         Assert.assertEquals(cartElements,1,"There are no products in the cart");
 
@@ -82,17 +75,12 @@ public class KatalonShopTests {
 //    Verifikovati da je broj proizvoda u korpi jedako 0
     @Test(priority = 20)
     public void RemovingProductFromCart() throws InterruptedException {
-
         driver.findElement(By.xpath("//*[@id='primary-menu']//li/a")).click();
         Assert.assertEquals(driver.getCurrentUrl(),baseUrl+ "/cart/", "Url is not right");
-
         int cartElements = driver.findElements(By.xpath("//*[@class='entry-content']/div/form")).size();
         Assert.assertEquals(cartElements,1,"There are no products in the cart");
-
         driver.findElement(By.xpath("//*[@class='product-remove']/a")).click();
-
         Thread.sleep(3000);
-
         cartElements = driver.findElements(By.xpath("//*[@class='entry-content']/div/form")).size();
         Assert.assertEquals(cartElements,0,"There are no products in the cart");
 
@@ -148,7 +136,6 @@ public class KatalonShopTests {
 //    Verifikovati da je prikazana poruka ERROR:
 //    The password you entered for the username customer is incorrect. Lost your password?
     @Test(priority = 50)
-    @Description("Verify error is displayed when password is wrong")
     public void verifyErrorIsDisplayedWhenPasswordIsWrong(){
 
         driver.findElement
@@ -175,7 +162,6 @@ public class KatalonShopTests {
 //    Verifikovati da je prikazana poruka ERROR: Invalid username. Lost your password?
 
     @Test(priority = 60)
-    @Description("Verify error is displayed when user does not exist")
     public void verifyErrorIsDisplayedWhenUserDoesNotExist(){
         driver.findElement
                 (By.xpath("//a[@href = 'https://cms.demo.katalon.com/my-account/']")).click();
@@ -201,7 +187,6 @@ public class KatalonShopTests {
 //    Verifikovati na stranici pise Hello Katalon Parlitul_Changed
 
     @Test(priority = 70)
-    @Description("Verify successful login")
     public void VerifySuccessfulLogin(){
         driver.findElement
                 (By.xpath("//a[@href = 'https://cms.demo.katalon.com/my-account/']")).click();
